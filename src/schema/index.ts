@@ -11,6 +11,9 @@ import { typeDefs as PostSchema, resolvers as PostResolvers } from "./post";
 // ? Comment
 import { typeDefs as CommentSchema, resolvers as CommentResolvers } from "./comment";
 
+// ? Subscriptions
+import subscriptionResolver from "./Subscription";
+
 // * Dynamic Imports
 import { readFileSync } from "fs";
 import { mergeResolvers } from "@graphql-tools/merge";
@@ -22,5 +25,10 @@ const typeDefinitions = `
 
 export const schema = makeExecutableSchema({
   typeDefs: [typeDefinitions, UserSchema, PostSchema, CommentSchema],
-  resolvers: mergeResolvers([UserResolvers, PostResolvers, CommentResolvers])
+  resolvers: mergeResolvers([
+    UserResolvers,
+    PostResolvers,
+    CommentResolvers,
+    subscriptionResolver,
+  ]),
 });
