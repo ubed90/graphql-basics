@@ -20,3 +20,12 @@ extend type Mutation {
   deleteComment(id: ID!): Comment!
   updateComment(id: ID!, data: String): Comment!
 }
+
+extend type Subscription {
+  comment(postId: String!): CommentSubscriptionPayload!
+}
+
+type CommentSubscriptionPayload {
+  mutation: MutationType!
+  data: Comment!
+}

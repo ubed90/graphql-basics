@@ -1,7 +1,6 @@
 import { createYoga } from "graphql-yoga";
 import { schema } from "./schema";
 import { createServer } from "http";
-import DB from "./DB";
 import { createContext } from "./context";
 
 // * Previous Dev Command using ts-node-dev

@@ -22,3 +22,11 @@ export type Comment = {
   author: String;
   post: String;
 };
+
+export enum MUTATION_TYPES {
+  CREATED = "CREATED",
+  UPDATED = "UPDATED",
+  DELETED = "DELETED"
+}
+
+export type MutationTypes = 'CREATED' | 'UPDATED' | 'DELETED';

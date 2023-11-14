@@ -17,6 +17,15 @@ extend type Mutation {
   updatePost(id: ID!, data: UpdatePostInput!): Post!
 }
 
+extend type Subscription {
+  post: PostSubscriptionPayload!
+}
+
+type PostSubscriptionPayload {
+  mutation: MutationType!
+  data: Post!
+}
+
 input CreatePostInput {
   title: String!
   body: String!

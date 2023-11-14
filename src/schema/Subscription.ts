@@ -1,11 +1,10 @@
 import { PubSub, createPubSub } from "graphql-yoga";
+import { GraphQLContext } from "../context";
 
 // * Subscription PubSub
 export type PubSubChannels = {
     count: [{ count: Number }]
 }
-
-export const pubsub = createPubSub<PubSubChannels>()
 
 const resolvers = {
   Subscription: {
@@ -13,7 +12,7 @@ const resolvers = {
       subscribe: (
         parent: any,
         args: any,
-        { pubsub }: { pubsub: PubSub<any> }
+        { pubsub }: GraphQLContext
       ) => {
         let count = 0;
 

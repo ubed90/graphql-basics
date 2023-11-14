@@ -1,3 +1,4 @@
+import { GraphQLError } from "graphql";
 import DB, { setData } from "../../DB";
 import { User } from "../../types";
 import { v4 as randomStringGenerator } from 'uuid';
@@ -11,7 +12,7 @@ const Mutation = {
     const emailTaken = ctx.db.users.some((user) => user.email === data.email);
 
     if (emailTaken) {
-      throw new Error('Email Already Taken');
+      throw new GraphQLError('Email Already Taken');
     }
 
     const newUser: User = {
@@ -29,7 +30,7 @@ const Mutation = {
   ): User => {
     const userIndex = ctx.db.users.findIndex((user) => user.id === id);
 
-    if (userIndex < 0) throw new Error('User not Found...');
+    if (userIndex < 0) throw new GraphQLError('User not Found...');
 
     const removedUser = ctx.db.users[userIndex];
     ctx.db.users.splice(userIndex, 1);
@@ -64,13 +65,13 @@ const Mutation = {
   ): User => {
     const user = ctx.db.users.find(user => user.id === id)
 
-    if(!user) throw new Error('User not Found...')
+    if(!user) throw new GraphQLError('User not Found...')
 
-    if(!data.email) throw new Error("Email Should be Provided")
+    if(!data.email) throw new GraphQLError("Email Should be Provided")
 
     const emailTaken = ctx.db.users.some((user) => user.email === data.email);
 
-    if(emailTaken) throw new Error("Email Already in Use...")
+    if(emailTaken) throw new GraphQLError("Email Already in Use...")
 
     user.email = data.email || user.email
     user.name = data.name || user.name
